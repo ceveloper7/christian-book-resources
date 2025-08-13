@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.sba.cbr</groupId>
+  <artifactId>cbr</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <name>Christian-Book-Resources</name>
+  
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.report.sourceEncoding>UTF-8</project.report.sourceEncoding>
+    
+    <jakartaee-api.version>3.2.0</jakartaee-api.version>
+    <hibernate.core.version>5.6.15.Final</hibernate.core.version>
+    <mariadb.connector.version>3.5.4</mariadb.connector.version>
+    <jakarta.servelt.api.version>6.1.0</jakarta.servelt.api.version>
+    <jakarta.jsp.api.version>4.0.0</jakarta.jsp.api.version>
+    <jakarta.jstl.api.version>3.0.2</jakarta.jstl.api.version>
+    
+  </properties>
+  
+  <dependencies>
+        
+        <dependency>
+        	<groupId>org.hibernate</groupId>
+        	<artifactId>hibernate-core</artifactId>
+        	<version>${hibernate.core.version}</version>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.mariadb.jdbc</groupId>
+        	<artifactId>mariadb-java-client</artifactId>
+        	<version>${mariadb.connector.version}</version>
+        	<scope>runtime</scope>
+        </dependency>
+        <dependency>
+		    <groupId>jakarta.servlet</groupId>
+		    <artifactId>jakarta.servlet-api</artifactId>
+		    <version>${jakarta.servelt.api.version}</version>
+		    
+		</dependency>
+		<dependency>
+		    <groupId>jakarta.servlet.jsp</groupId>
+		    <artifactId>jakarta.servlet.jsp-api</artifactId>
+		    <version>${jakarta.jsp.api.version}</version>
+		    
+		</dependency>
+		<dependency>
+		    <groupId>jakarta.servlet.jsp.jstl</groupId>
+		    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+		    <version>${jakarta.jstl.api.version}</version>
+		    
+		</dependency>
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+			<version>${jakartaee-api.version}</version>
+			<scope>compile</scope>
+		</dependency>
+  </dependencies>
+  
+  <build>
+    <testSourceDirectory>test</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>        
+          <release>21</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.3</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
