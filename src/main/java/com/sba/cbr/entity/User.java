@@ -1,8 +1,7 @@
 package com.sba.cbr.entity;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -12,12 +11,13 @@ import jakarta.persistence.Table;
 public class User extends BaseEntity{
 	private String email;
 	private String password;
+	
+	@Column(name = "full_name")
 	private String fullname;
-
-	private Integer created_by;
-	private LocalDateTime created_at;
-	private Integer updated_by;
-	private LocalDateTime updated_at;
+	
+	@Embedded
+	private AuditFields audit;
+	
 
 	public User() {
 	}
@@ -39,7 +39,6 @@ public class User extends BaseEntity{
 		this.password = password;
 	}
 
-	@Column(name = "full_name")
 	public String getFullname() {
 		return fullname;
 	}
@@ -47,37 +46,13 @@ public class User extends BaseEntity{
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
-
-	public Integer getCreated_by() {
-		return created_by;
+	
+	public AuditFields getAuditFields() {
+		return audit;
 	}
-
-	public void setCreated_by(Integer created_by) {
-		this.created_by = created_by;
-	}
-
-	public LocalDateTime getCreated_at() {
-		return created_at;
-	}
-
-	public void setCreated_at(LocalDateTime created_at) {
-		this.created_at = created_at;
-	}
-
-	public Integer getUpdated_by() {
-		return updated_by;
-	}
-
-	public void setUpdated_by(Integer updated_by) {
-		this.updated_by = updated_by;
-	}
-
-	public LocalDateTime getUpdated_at() {
-		return updated_at;
-	}
-
-	public void setUpdated_at(LocalDateTime updated_at) {
-		this.updated_at = updated_at;
+	
+	public void setAuditFields(AuditFields audit) {
+		this.audit = audit;
 	}
 
 }
