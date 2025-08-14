@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="users")
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
+@AttributeOverride(name = "active", column = @Column(name = "is_active"))
 public class User extends BaseEntity{
 	
 	private String email;

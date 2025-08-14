@@ -14,6 +14,8 @@ public abstract class BaseEntity implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
+	
+	private boolean active = true;
 
     public Integer getId() {
         return id;
@@ -21,6 +23,14 @@ public abstract class BaseEntity implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+    
+    public boolean isActive() {
+    	return active;
+    }
+    
+    public void setActive(boolean active) {
+    	this.active = active;
     }
 
     @Override
