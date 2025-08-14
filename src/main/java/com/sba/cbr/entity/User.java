@@ -1,5 +1,6 @@
 package com.sba.cbr.entity;
 
+import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -8,7 +9,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="users")
+@AttributeOverride(name = "id", column = @Column(name = "user_id"))
 public class User extends BaseEntity{
+	
 	private String email;
 	private String password;
 	
@@ -21,7 +24,6 @@ public class User extends BaseEntity{
 
 	public User() {
 	}
-
 
 	public String getEmail() {
 		return email;
