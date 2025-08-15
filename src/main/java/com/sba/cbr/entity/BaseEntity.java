@@ -3,6 +3,7 @@ package com.sba.cbr.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,6 +13,7 @@ import jakarta.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
 	@Id
+	@Column(unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 	

@@ -1,18 +1,19 @@
-package com.sba.cbr.entity2;
+package com.sba.cbr.entity;
 // Generated Aug 14, 2025, 1:05:46 PM by Hibernate Tools 6.2.25.Final
 
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
-
-import com.sba.cbr.entity.AuditFields;
-import com.sba.cbr.entity.BaseEntity;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 
 /**
@@ -26,8 +27,10 @@ public class Customer extends BaseEntity implements java.io.Serializable {
 
 	@Column(name = "email", unique = true, nullable = false, length = 64)
 	private String email;
-	private String fullname;
-	private String address;
+	private String firstname;
+	private String lastname;
+	private String address_line1;
+	private String address_line2;
 	private String city;
 	private String country;
 	private String phone;
@@ -37,34 +40,44 @@ public class Customer extends BaseEntity implements java.io.Serializable {
 	@Embedded
 	private AuditFields audit;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
 	private Set reviews = new HashSet(0);
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
 	private Set bookOrders = new HashSet(0);
 
 	public Customer() {
 	}
 
-	public Customer(String email, String fullname, String address, String city, String country, String phone,
-			String zipcode, String password) {
+	public Customer(String email, String firstname, String lastname, String address_line1, String address_line2, String city, String country, String phone,
+			String zipcode, String password, AuditFields audit) {
 		this.email = email;
-		this.fullname = fullname;
-		this.address = address;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.address_line1 = address_line1;
+		this.address_line2 = address_line2;
 		this.city = city;
 		this.country = country;
 		this.phone = phone;
 		this.zipcode = zipcode;
 		this.password = password;
+		this.audit = audit;
 	}
 
-	public Customer(String email, String fullname, String address, String city, String country, String phone,
-			String zipcode, String password, Set reviews, Set bookOrders) {
+	public Customer(String email, String firstname, String lastname, String address_line1, String address_line2, String city, String country, String phone,
+			String zipcode, String password, AuditFields audit, Set reviews, Set bookOrders) {
 		this.email = email;
-		this.fullname = fullname;
-		this.address = address;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.address_line1 = address_line1;
+		this.address_line2 = address_line2;
 		this.city = city;
 		this.country = country;
 		this.phone = phone;
 		this.zipcode = zipcode;
 		this.password = password;
+		this.audit = audit;
+		
+		
 		this.reviews = reviews;
 		this.bookOrders = bookOrders;
 	}
@@ -77,20 +90,42 @@ public class Customer extends BaseEntity implements java.io.Serializable {
 		this.email = email;
 	}
 
+	public String getFirstname() {
+		return this.firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	
+	public String getLastname() {
+		return this.lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	
+	@Transient
 	public String getFullname() {
-		return this.fullname;
+		return this.firstname + " " + this.lastname;
 	}
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
+
+	public String getAddressLine1() {
+		return this.address_line1;
 	}
 
-	public String getAddress() {
-		return this.address;
+	public void setAddressLine1(String addressLine1) {
+		this.address_line1 = addressLine1;
+	}
+	
+	public String getAddressLine2() {
+		return this.address_line2;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddressLine2(String addressLine2) {
+		this.address_line2 = addressLine2;
 	}
 
 	public String getCity() {
@@ -108,6 +143,12 @@ public class Customer extends BaseEntity implements java.io.Serializable {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
+	@Transient
+	public String getCountryName() {
+		return new Locale("", this.country).getDisplayCountry();
+	}
+
 
 	public String getPhone() {
 		return this.phone;
@@ -147,6 +188,14 @@ public class Customer extends BaseEntity implements java.io.Serializable {
 
 	public void setBookOrders(Set bookOrders) {
 		this.bookOrders = bookOrders;
+	}
+	
+	public AuditFields getAuditFields() {
+		return audit;
+	}
+	
+	public void setAuditFields(AuditFields audit) {
+		this.audit = audit;
 	}
 
 }
