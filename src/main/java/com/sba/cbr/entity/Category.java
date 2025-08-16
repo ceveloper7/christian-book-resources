@@ -1,7 +1,6 @@
 package com.sba.cbr.entity;
 // Generated Aug 14, 2025, 1:05:46 PM by Hibernate Tools 6.2.25.Final
 
-import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +26,7 @@ public class Category extends BaseEntity implements java.io.Serializable {
 	private AuditFields audit; 
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-	private Set books = new HashSet(0);
+	private Set<Book> books = new HashSet<Book>(0);
 
 	public Category() {
 	}
@@ -49,12 +48,20 @@ public class Category extends BaseEntity implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Set getBooks() {
+	public Set<Book> getBooks() {
 		return this.books;
 	}
 
 	public void setBooks(Set books) {
 		this.books = books;
+	}
+	
+	public AuditFields getAuditFields() {
+		return audit;
+	}
+	
+	public void setAuditFields(AuditFields audit) {
+		this.audit = audit;
 	}
 
 }

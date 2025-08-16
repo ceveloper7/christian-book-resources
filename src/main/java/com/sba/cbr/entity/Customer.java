@@ -1,7 +1,6 @@
 package com.sba.cbr.entity;
 // Generated Aug 14, 2025, 1:05:46 PM by Hibernate Tools 6.2.25.Final
 
-import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -41,9 +40,9 @@ public class Customer extends BaseEntity implements java.io.Serializable {
 	private AuditFields audit;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-	private Set reviews = new HashSet(0);
+	private Set<Review> reviews = new HashSet<Review>(0);
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-	private Set bookOrders = new HashSet(0);
+	private Set<BookOrder> bookOrders = new HashSet<BookOrder>(0);
 
 	public Customer() {
 	}
@@ -174,19 +173,19 @@ public class Customer extends BaseEntity implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public Set getReviews() {
+	public Set<Review> getReviews() {
 		return this.reviews;
 	}
 
-	public void setReviews(Set reviews) {
+	public void setReviews(Set<Review> reviews) {
 		this.reviews = reviews;
 	}
 
-	public Set getBookOrders() {
+	public Set<BookOrder> getBookOrders() {
 		return this.bookOrders;
 	}
 
-	public void setBookOrders(Set bookOrders) {
+	public void setBookOrders(Set<BookOrder> bookOrders) {
 		this.bookOrders = bookOrders;
 	}
 	
