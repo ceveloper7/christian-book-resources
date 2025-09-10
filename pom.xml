@@ -16,6 +16,7 @@
     <jakarta.servelt.api.version>6.1.0</jakarta.servelt.api.version>
     <jakarta.jsp.api.version>4.0.0</jakarta.jsp.api.version>
     <jakarta.jstl.api.version>3.0.2</jakarta.jstl.api.version>
+    <junit-version>5.6.0</junit-version>
     
   </properties>
   
@@ -63,6 +64,31 @@
 			<version>${jakartaee-api.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>2.1</version>
+            <scope>test</scope>
+        </dependency>
   </dependencies>
   
   <build>
