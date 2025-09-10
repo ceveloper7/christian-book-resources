@@ -1,5 +1,6 @@
 package com.sba.dao;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
@@ -21,25 +22,24 @@ public class UserDAOTest {
 	
 	private static EntityManagerFactory emf;
 	private static EntityManager em;
-	private static EntityTransaction transaction;
 	private static UserDAO userDAO;
 	
 	@BeforeAll
 	public static void setUpClass() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cbr");
 		EntityManager em = emf.createEntityManager();
-		EntityTransaction transaction = em.getTransaction();
+		//EntityTransaction transaction = em.getTransaction();
 		
-		UserDAO userDAO = new UserDAO(em);
+		userDAO = new UserDAO(em);
 	}
 	
 	@Test
 	public void testCreateUser() {
 		
 		User user = new User();
-		user.setEmail("p.diaz@gmail.com");
-		user.setFullname("Pablo Diaz");
-		user.setPassword("pd_34@.");
+		user.setEmail("a.gomez@gmail.com");
+		user.setFullname("Alberto Gomez");
+		user.setPassword("mstre@.");
 		
 		AuditFields au = new AuditFields();
 		au.setCreated_by(19);
@@ -56,16 +56,14 @@ public class UserDAOTest {
 			assertTrue(user.getId() > 0);
 		}
 		catch(Exception e) {
-			if (transaction.isActive()) {
-	            transaction.rollback();
-	        }
+			
 			e.printStackTrace();
 		}
 		
 		System.out.println("A user object was persisted");
 	}
 	
-	@Test
+	@Test()
 	public void testCreateUserFieldNotSet() {
 		User user = new User();
 		
@@ -76,13 +74,37 @@ public class UserDAOTest {
 			assertTrue(user.getId() > 0);
 		}
 		catch(Exception e) {
-			if (transaction.isActive()) {
-	            transaction.rollback();
-	        }
+			
 			e.printStackTrace();
 		}
 		
 		System.out.println("A user object was persisted");	
+	}
+	
+	@Test
+	public void testUpdateUser() {
+		User user = new User();
+		
+		user.setId(21);
+		user.setEmail("p.diaz@gmail.com");
+		user.setPassword("pd_340@.");
+		user.setFullname("Pablo Diaz");
+		
+		AuditFields audit = new AuditFields();
+		audit.setCreated_by(19);
+		audit.setCreated_at(LocalDateTime.now());
+		audit.setUpdated_by(19);
+		audit.setUpdated_at(LocalDateTime.now());
+		
+		user.setAuditFields(audit);
+		user.setActive(true);
+		
+		user = userDAO.update(user);
+		String expected = "pd_340@.";
+		String actual = user.getPassword();
+		
+		assertEquals(expected, actual);
+		
 	}
 	
 	@AfterAll
