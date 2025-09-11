@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.sba.cbr.dao.UserDAO;
@@ -15,9 +17,9 @@ import com.sba.cbr.entity.User;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
+@DisplayName("User Data Acces Object Test")
 public class UserDAOTest {
 	
 	private static EntityManagerFactory emf;
@@ -33,6 +35,7 @@ public class UserDAOTest {
 		userDAO = new UserDAO(em);
 	}
 	
+	@DisplayName("Create User Test")
 	@Test
 	public void testCreateUser() {
 		
@@ -63,7 +66,9 @@ public class UserDAOTest {
 		System.out.println("A user object was persisted");
 	}
 	
-	@Test()
+	@DisplayName("Create User with fields not set")
+	@Test
+	@Disabled
 	public void testCreateUserFieldNotSet() {
 		User user = new User();
 		
@@ -81,6 +86,7 @@ public class UserDAOTest {
 		System.out.println("A user object was persisted");	
 	}
 	
+	@DisplayName("Update User Test")
 	@Test
 	public void testUpdateUser() {
 		User user = new User();

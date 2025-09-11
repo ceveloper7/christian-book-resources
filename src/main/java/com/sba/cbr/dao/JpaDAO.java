@@ -14,18 +14,36 @@ public class JpaDAO<E> {
 	}
 	
 	public E create(E entity) {
-		transaction.begin();
-		entityManager.persist(entity);
-		entityManager.flush();
-		entityManager.refresh(entity);
-		transaction.commit();
+		try {
+			transaction.begin();
+			entityManager.persist(entity);
+			entityManager.flush();
+			entityManager.refresh(entity);
+			transaction.commit();
+		}
+		catch(Exception ex) {
+			if (transaction.isActive()) {
+	            transaction.rollback();
+	        }
+			ex.printStackTrace();
+		}
+		
 		return entity;
 	}
 	
 	public E update(E entity) {
-		transaction.begin();
-		entityManager.merge(entity);
-		transaction.commit();
+		try {
+			transaction.begin();
+			entityManager.merge(entity);
+			transaction.commit();
+		}
+		catch(Exception ex) {
+			if (transaction.isActive()) {
+	            transaction.rollback();
+	        }
+			ex.printStackTrace();
+		}
+		
 		return entity;
 	}
 }

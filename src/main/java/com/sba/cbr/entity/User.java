@@ -5,6 +5,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -12,10 +15,17 @@ import jakarta.persistence.Table;
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
 @AttributeOverride(name = "active", column = @Column(name = "is_active"))
 public class User extends BaseEntity{
-	
+	@NotNull
+	@Size(max = 64)
+	@Email
 	private String email;
+	
+	@NotNull
+	@Size(max = 16)
 	private String password;
 	
+	@NotNull
+	@Size(max = 50)
 	@Column(name = "full_name")
 	private String fullname;
 	

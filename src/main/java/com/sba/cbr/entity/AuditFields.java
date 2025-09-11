@@ -2,14 +2,18 @@ package com.sba.cbr.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class AuditFields {
-	
+	@Nonnull
 	private Integer created_by;
+	@Nonnull
 	private LocalDateTime created_at;
+	@Nonnull
 	private Integer updated_by;
+	@Nonnull
 	private LocalDateTime updated_at;
 	
 	
