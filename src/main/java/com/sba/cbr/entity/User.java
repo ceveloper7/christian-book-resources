@@ -32,40 +32,69 @@ public class User extends BaseEntity{
 	@Embedded
 	private AuditFields audit;
 	
+	@NotNull
+	@Column(name = "is_active")
+	private boolean active;
+	
+	public User() {}
 
-	public User() {
+	public static class Builder{
+		private String email;
+		private String password;
+		private String fullname;
+		private AuditFields audit;
+		private boolean active;
+		
+		public Builder(String email, String password, String fullname) {
+			this.email = email;
+			this.password = password;
+			this.fullname = fullname;
+		}
+		
+		public Builder withAudits(AuditFields audit) {
+			this.audit = audit;
+			return this;
+		}
+		
+		public Builder isActive(boolean active) {
+			this.active = active;
+			return this;
+		}
+		
+		public User build() {
+			return new User(this);
+		}
+	}
+	
+	private User(Builder builder) {
+		this.email = builder.email;
+		this.password = builder.password;
+		this.fullname = builder.fullname;
+		this.audit = builder.audit;
+		this.active = builder.active;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
+	
 	public String getPassword() {
 		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getFullname() {
 		return fullname;
 	}
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
-	
 	public AuditFields getAuditFields() {
 		return audit;
 	}
 	
-	public void setAuditFields(AuditFields audit) {
-		this.audit = audit;
+	public boolean getActive() {
+		return active;
 	}
+	
+	
 
 }

@@ -10,18 +10,16 @@ import jakarta.persistence.Persistence;
 public class UserTest {
 	public static void main(String[] args) {
 		
-		User user = new User();
-		user.setEmail("c.hernandez@gmail.com");
-		user.setFullname("Claudio Hernandez");
-		user.setPassword("ch_34@.");
-		
 		AuditFields au = new AuditFields();
 		au.setCreated_by(19);
 		au.setCreated_at(LocalDateTime.now());
 		au.setUpdated_by(19);
 		au.setUpdated_at(LocalDateTime.now());
 		
-		user.setAuditFields(au);
+		User user = new User.Builder("d.sandoval@gmail.com", "ds_444@.", "Daniel Sandoval")
+					.withAudits(au)
+					.isActive(true)
+					.build();
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cbr");
 		EntityManager em = emf.createEntityManager();

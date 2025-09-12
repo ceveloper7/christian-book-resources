@@ -39,23 +39,19 @@ public class UserDAOTest {
 	@Test
 	public void testCreateUser() {
 		
-		User user = new User();
-		user.setEmail("a.gomez@gmail.com");
-		user.setFullname("Alberto Gomez");
-		user.setPassword("mstre@.");
-		
 		AuditFields au = new AuditFields();
 		au.setCreated_by(19);
 		au.setCreated_at(LocalDateTime.now());
 		au.setUpdated_by(19);
 		au.setUpdated_at(LocalDateTime.now());
 		
-		user.setAuditFields(au);
-		
 		try {
+			User user = new User.Builder("m.pinedo@gmail.com", "p_@3@.", "Mario Pinedo")
+					.withAudits(au)
+					.isActive(true)
+					.build();
 			
 			user = userDAO.create(user);
-			
 			assertTrue(user.getId() > 0);
 		}
 		catch(Exception e) {
@@ -70,18 +66,18 @@ public class UserDAOTest {
 	@Test
 	@Disabled
 	public void testCreateUserFieldNotSet() {
-		User user = new User();
+		//User user = new User();
 		
-		try {
-			
-			user = userDAO.create(user);
-			
-			assertTrue(user.getId() > 0);
-		}
-		catch(Exception e) {
-			
-			e.printStackTrace();
-		}
+//		try {
+//			
+//			user = userDAO.create(user);
+//			
+//			assertTrue(user.getId() > 0);
+//		}
+//		catch(Exception e) {
+//			
+//			e.printStackTrace();
+//		}
 		
 		System.out.println("A user object was persisted");	
 	}
@@ -89,28 +85,23 @@ public class UserDAOTest {
 	@DisplayName("Update User Test")
 	@Test
 	public void testUpdateUser() {
-		User user = new User();
-		
-		user.setId(21);
-		user.setEmail("p.diaz@gmail.com");
-		user.setPassword("pd_340@.");
-		user.setFullname("Pablo Diaz");
-		
 		AuditFields audit = new AuditFields();
 		audit.setCreated_by(19);
 		audit.setCreated_at(LocalDateTime.now());
 		audit.setUpdated_by(19);
 		audit.setUpdated_at(LocalDateTime.now());
 		
-		user.setAuditFields(audit);
-		user.setActive(true);
-		
+		User user = new User.Builder("g.pinedo@gmail.com", "g_@3@.", "Gloria Pinedo")
+					.withAudits(audit)
+					.isActive(true)
+					.build();
+		user.setId(25);
+		System.out.println(user.getId() + " " + user.getFullname() + " " + user.getPassword());
 		user = userDAO.update(user);
-		String expected = "pd_340@.";
+		String expected = "g_@3@.";
 		String actual = user.getPassword();
 		
 		assertEquals(expected, actual);
-		
 	}
 	
 	@AfterAll
