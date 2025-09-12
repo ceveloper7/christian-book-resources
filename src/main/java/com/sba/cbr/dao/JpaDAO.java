@@ -10,7 +10,7 @@ public class JpaDAO<E> {
 	public JpaDAO(EntityManager entityManager) {
 		super();
 		this.entityManager = entityManager;
-		transaction = entityManager.getTransaction();
+		this.transaction = entityManager.getTransaction();
 	}
 	
 	public E create(E entity) {

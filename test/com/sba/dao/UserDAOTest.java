@@ -39,14 +39,12 @@ public class UserDAOTest {
 	@Test
 	public void testCreateUser() {
 		
-		AuditFields au = new AuditFields();
-		au.setCreated_by(19);
-		au.setCreated_at(LocalDateTime.now());
-		au.setUpdated_by(19);
-		au.setUpdated_at(LocalDateTime.now());
+		AuditFields au = new AuditFields
+				.Builder(19, LocalDateTime.now(), 19, LocalDateTime.now())
+				.build();
 		
 		try {
-			User user = new User.Builder("m.pinedo@gmail.com", "p_@3@.", "Mario Pinedo")
+			User user = new User.Builder("k.pacheco@gmail.com", "kp@#@$^", "Kevin Pacheco")
 					.withAudits(au)
 					.isActive(true)
 					.build();
@@ -85,20 +83,18 @@ public class UserDAOTest {
 	@DisplayName("Update User Test")
 	@Test
 	public void testUpdateUser() {
-		AuditFields audit = new AuditFields();
-		audit.setCreated_by(19);
-		audit.setCreated_at(LocalDateTime.now());
-		audit.setUpdated_by(19);
-		audit.setUpdated_at(LocalDateTime.now());
+		AuditFields au = new AuditFields
+				.Builder(19, LocalDateTime.now(), 19, LocalDateTime.now())
+				.build();
 		
-		User user = new User.Builder("g.pinedo@gmail.com", "g_@3@.", "Gloria Pinedo")
-					.withAudits(audit)
+		User user = new User.Builder("t.pasos@gmail.com", "@@%%$", "Tito Pasos")
+					.withAudits(au)
 					.isActive(true)
 					.build();
-		user.setId(25);
+		user.setId(28);
 		System.out.println(user.getId() + " " + user.getFullname() + " " + user.getPassword());
 		user = userDAO.update(user);
-		String expected = "g_@3@.";
+		String expected = "@@%%$";
 		String actual = user.getPassword();
 		
 		assertEquals(expected, actual);
@@ -106,8 +102,11 @@ public class UserDAOTest {
 	
 	@AfterAll
 	public static void tearDownClass() {
-		em.close();
-		emf.close();
+		if(em.isOpen())
+			em.close();
+		
+		if(emf.isOpen())
+			emf.close();
 	}
 
 }

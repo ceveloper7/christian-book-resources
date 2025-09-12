@@ -13,11 +13,9 @@ public class CategoryTest {
 		Category cat = new Category();
 		cat.setName("Gospel");
 		
-		AuditFields au = new AuditFields();
-		au.setCreated_by(19);
-		au.setCreated_at(LocalDateTime.now());
-		au.setUpdated_by(19);
-		au.setUpdated_at(LocalDateTime.now());
+		AuditFields au = new AuditFields
+				.Builder(19, LocalDateTime.now(), 19, LocalDateTime.now())
+				.build();
 		
 		cat.setAuditFields(au);
 		

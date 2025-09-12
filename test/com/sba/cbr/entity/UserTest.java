@@ -10,13 +10,11 @@ import jakarta.persistence.Persistence;
 public class UserTest {
 	public static void main(String[] args) {
 		
-		AuditFields au = new AuditFields();
-		au.setCreated_by(19);
-		au.setCreated_at(LocalDateTime.now());
-		au.setUpdated_by(19);
-		au.setUpdated_at(LocalDateTime.now());
+		AuditFields au = new AuditFields
+				.Builder(19, LocalDateTime.now(), 19, LocalDateTime.now())
+				.build();
 		
-		User user = new User.Builder("d.sandoval@gmail.com", "ds_444@.", "Daniel Sandoval")
+		User user = new User.Builder("barcvilla@gmail.com", "ms$_tg", "Benedicto Carranza")
 					.withAudits(au)
 					.isActive(true)
 					.build();
