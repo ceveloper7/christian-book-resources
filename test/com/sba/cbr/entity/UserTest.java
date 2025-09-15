@@ -14,16 +14,18 @@ public class UserTest {
 				.Builder(19, LocalDateTime.now(), 19, LocalDateTime.now())
 				.build();
 		
-		User user = new User.Builder("barcvilla@gmail.com", "ms$_tg", "Benedicto Carranza")
+		User user = new User.Builder("t.palacios@gmail.com", "_palacio$%", "Tatania Palacios")
 					.withAudits(au)
 					.isActive(true)
 					.build();
 		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cbr");
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction transaction = em.getTransaction();
+		EntityTransaction transaction = null;
 		
-		try {
+		try(
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("cbr");
+			EntityManager em = emf.createEntityManager();) 
+		{
+			transaction = em.getTransaction();
 			transaction.begin();
 			em.persist(user);
 			transaction.commit();
@@ -34,10 +36,10 @@ public class UserTest {
 	        }
 			e.printStackTrace();
 		}
-		finally {
-			em.close();
-			emf.close();
-		}
+//		finally {
+//			em.close();
+//			emf.close();
+//		}
 		
 		System.out.println("A user object was persisted");
 	}

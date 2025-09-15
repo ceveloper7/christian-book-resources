@@ -30,8 +30,6 @@ public class UserDAOTest {
 	public static void setUpClass() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("cbr");
 		EntityManager em = emf.createEntityManager();
-		//EntityTransaction transaction = em.getTransaction();
-		
 		userDAO = new UserDAO(em);
 	}
 	
@@ -44,7 +42,7 @@ public class UserDAOTest {
 				.build();
 		
 		try {
-			User user = new User.Builder("k.pacheco@gmail.com", "kp@#@$^", "Kevin Pacheco")
+			User user = new User.Builder("r.casas@gmail.com", "kp@#@$^", "Romina Casas")
 					.withAudits(au)
 					.isActive(true)
 					.build();
@@ -102,10 +100,10 @@ public class UserDAOTest {
 	
 	@AfterAll
 	public static void tearDownClass() {
-		if(em.isOpen())
+		if(em != null)
 			em.close();
 		
-		if(emf.isOpen())
+		if(emf != null)
 			emf.close();
 	}
 
