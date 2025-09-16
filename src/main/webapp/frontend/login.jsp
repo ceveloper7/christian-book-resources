@@ -4,16 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CBR - Online Books Store</title>
+<title>Login</title>
 </head>
 <body>
 	<jsp:directive.include file="header.jsp" />
 	
 	<div align="center">
-		<h3>This is main Content:</h3>
-		<h2>New Books:</h2>
-		<h2>Best-Selling Books:</h2>
-		<h2>Most-Favoured Books:</h2>
+		<h2>Please login</h2>
+		<form>
+			Email: <input type="text", size="10"/><br/>
+			Password: <input type="password" size="10"/>
+			<input type="submit" value="Login"/>
+		</form>
 	</div>
 	
 	<jsp:directive.include file="footer.jsp" />

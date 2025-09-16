@@ -1,0 +1,4 @@
+
+<div align="center">
+	<h4>This is footer: Copyright, About, Contact</h1>
+</div>
