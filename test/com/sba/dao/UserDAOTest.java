@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.sba.cbr.dao.UserDAO;
+import com.sba.cbr.dataobjects.RUser;
 import com.sba.cbr.entity.AuditFields;
 import com.sba.cbr.entity.User;
 

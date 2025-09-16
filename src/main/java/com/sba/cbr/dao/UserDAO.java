@@ -2,6 +2,7 @@ package com.sba.cbr.dao;
 
 import java.util.List;
 
+import com.sba.cbr.dataobjects.RUser;
 import com.sba.cbr.entity.User;
 
 import jakarta.persistence.EntityManager;
