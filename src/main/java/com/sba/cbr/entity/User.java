@@ -56,7 +56,7 @@ public class User extends BaseEntity{
 			return this;
 		}
 		
-		public Builder isActive(boolean active) {
+		public Builder withActive(boolean active) {
 			this.active = active;
 			return this;
 		}
@@ -91,7 +91,7 @@ public class User extends BaseEntity{
 		return audit;
 	}
 	
-	public boolean getActive() {
+	public boolean isActive() {
 		return active;
 	}
 	

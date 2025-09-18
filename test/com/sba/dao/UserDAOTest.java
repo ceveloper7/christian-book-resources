@@ -1,6 +1,7 @@
 package com.sba.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import com.sba.cbr.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceException;
 
 @DisplayName("User Data Acces Object Test")
 public class UserDAOTest {
@@ -43,13 +45,14 @@ public class UserDAOTest {
 				.build();
 		
 		try {
-			User user = new User.Builder("r.casas@gmail.com", "kp@#@$^", "Romina Casas")
+			User user = new User.Builder("t.mendoza@gmail.com", "tmen#@$^", "Tini Mendoza")
 					.withAudits(au)
-					.isActive(true)
+					.withActive(true)
 					.build();
 			
 			user = userDAO.create(user);
 			assertTrue(user.getId() > 0);
+			assertTrue(user.isActive());
 		}
 		catch(Exception e) {
 			
@@ -59,22 +62,12 @@ public class UserDAOTest {
 		System.out.println("A user object was persisted");
 	}
 	
-	@DisplayName("Create User with fields not set")
+	@DisplayName("Exception produced with User fields not set")
 	@Test
 	@Disabled
 	public void testCreateUserFieldNotSet() {
-		//User user = new User();
-		
-//		try {
-//			
-//			user = userDAO.create(user);
-//			
-//			assertTrue(user.getId() > 0);
-//		}
-//		catch(Exception e) {
-//			
-//			e.printStackTrace();
-//		}
+		User user = new User();
+		user = userDAO.create(user);
 		
 		System.out.println("A user object was persisted");	
 	}
@@ -88,7 +81,7 @@ public class UserDAOTest {
 		
 		User user = new User.Builder("t.pasos@gmail.com", "@@%%$", "Tito Pasos")
 					.withAudits(au)
-					.isActive(true)
+					.withActive(true)
 					.build();
 		user.setId(28);
 		System.out.println(user.getId() + " " + user.getFullname() + " " + user.getPassword());

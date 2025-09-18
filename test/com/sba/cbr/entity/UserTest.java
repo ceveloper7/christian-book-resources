@@ -14,9 +14,9 @@ public class UserTest {
 				.Builder(19, LocalDateTime.now(), 19, LocalDateTime.now())
 				.build();
 		
-		User user = new User.Builder("t.palacios@gmail.com", "_palacio$%", "Tatania Palacios")
+		User user = new User.Builder("m.dominguez@gmail.com", "%%domm$%", "Mario Dominguez")
 					.withAudits(au)
-					.isActive(true)
+					.withActive(true)
 					.build();
 		
 		EntityTransaction transaction = null;
