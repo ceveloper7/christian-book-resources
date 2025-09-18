@@ -29,8 +29,16 @@ public class User extends BaseEntity{
 	@Column(name = "full_name")
 	private String fullname;
 	
-	@Embedded
-	private AuditFields audit;
+	@NotNull
+	@Column(name = "created_by")
+	private Integer createdBy;
+	
+	@NotNull
+	@Column(name = "updated_by")
+	private Integer updatedBy;
+	
+//	@Embedded
+//	private AuditFields audit;
 	
 	@NotNull
 	@Column(name = "is_active")
@@ -42,24 +50,29 @@ public class User extends BaseEntity{
 		private String email;
 		private String password;
 		private String fullname;
-		private AuditFields audit;
+		private Integer createdBy;
+		private Integer updatedBy;
+//		private AuditFields audit;
 		private boolean active;
 		
-		public Builder(String email, String password, String fullname) {
+		public Builder(String email, String password, String fullname, Integer createdBy, Integer updatedBy, boolean active) {
 			this.email = email;
 			this.password = password;
 			this.fullname = fullname;
-		}
-		
-		public Builder withAudits(AuditFields audit) {
-			this.audit = audit;
-			return this;
-		}
-		
-		public Builder withActive(boolean active) {
+			this.createdBy = createdBy;
+			this.updatedBy = updatedBy;
 			this.active = active;
-			return this;
 		}
+		
+//		public Builder withAudits(AuditFields audit) {
+//			this.audit = audit;
+//			return this;
+//		}
+		
+//		public Builder Active(boolean active) {
+//			this.active = active;
+//			return this;
+//		}
 		
 		public User build() {
 			return new User(this);
@@ -70,7 +83,10 @@ public class User extends BaseEntity{
 		this.email = builder.email;
 		this.password = builder.password;
 		this.fullname = builder.fullname;
-		this.audit = builder.audit;
+		this.createdBy = builder.createdBy;
+		this.updatedBy = builder.updatedBy;
+		
+//		this.audit = builder.audit;
 		this.active = builder.active;
 	}
 
@@ -87,9 +103,9 @@ public class User extends BaseEntity{
 		return fullname;
 	}
 
-	public AuditFields getAuditFields() {
-		return audit;
-	}
+//	public AuditFields getAuditFields() {
+//		return audit;
+//	}
 	
 	public boolean isActive() {
 		return active;

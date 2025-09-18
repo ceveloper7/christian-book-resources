@@ -40,14 +40,8 @@ public class UserDAOTest {
 	@Test
 	public void testCreateUser() {
 		
-		AuditFields au = new AuditFields
-				.Builder(19, LocalDateTime.now(), 19, LocalDateTime.now())
-				.build();
-		
 		try {
-			User user = new User.Builder("t.mendoza@gmail.com", "tmen#@$^", "Tini Mendoza")
-					.withAudits(au)
-					.withActive(true)
+			User user = new User.Builder("a.clossa@gmail.com", "acl#@$^", "Andrea Clossa", 19, 19, true)
 					.build();
 			
 			user = userDAO.create(user);
@@ -75,18 +69,12 @@ public class UserDAOTest {
 	@DisplayName("Update User Test")
 	@Test
 	public void testUpdateUser() {
-		AuditFields au = new AuditFields
-				.Builder(19, LocalDateTime.now(), 19, LocalDateTime.now())
-				.build();
 		
-		User user = new User.Builder("t.pasos@gmail.com", "@@%%$", "Tito Pasos")
-					.withAudits(au)
-					.withActive(true)
+		User user = new User.Builder("a.closa@gmail.com", "acl#@$^", "Andrea Closa", 19, 19, true)
 					.build();
-		user.setId(28);
-		System.out.println(user.getId() + " " + user.getFullname() + " " + user.getPassword());
+		user.setId(36);
 		user = userDAO.update(user);
-		String expected = "@@%%$";
+		String expected = "acl#@$^";
 		String actual = user.getPassword();
 		
 		assertEquals(expected, actual);

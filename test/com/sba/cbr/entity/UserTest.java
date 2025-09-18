@@ -10,13 +10,7 @@ import jakarta.persistence.Persistence;
 public class UserTest {
 	public static void main(String[] args) {
 		
-		AuditFields au = new AuditFields
-				.Builder(19, LocalDateTime.now(), 19, LocalDateTime.now())
-				.build();
-		
-		User user = new User.Builder("m.dominguez@gmail.com", "%%domm$%", "Mario Dominguez")
-					.withAudits(au)
-					.withActive(true)
+		User user = new User.Builder("m.dominguez@gmail.com", "%%domm$%", "Mario Dominguez", 19, 19, true)
 					.build();
 		
 		EntityTransaction transaction = null;
