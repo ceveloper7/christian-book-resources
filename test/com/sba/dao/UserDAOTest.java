@@ -1,6 +1,8 @@
 package com.sba.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,12 +15,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.sba.cbr.dao.UserDAO;
-import com.sba.cbr.dataobjects.RUser;
-import com.sba.cbr.entity.AuditFields;
 import com.sba.cbr.entity.User;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceException;
 
@@ -41,7 +42,8 @@ public class UserDAOTest {
 	public void testCreateUser() {
 		
 		try {
-			User user = new User.Builder("a.clossa@gmail.com", "acl#@$^", "Andrea Clossa", 19, 19, true)
+			User user = new User.Builder("a.clossa@gmail.com", "acl#@$^", "Andrea Clossa", 19, 
+					LocalDateTime.now(), 19, LocalDateTime.now(), true)
 					.build();
 			
 			user = userDAO.create(user);
@@ -69,15 +71,56 @@ public class UserDAOTest {
 	@DisplayName("Update User Test")
 	@Test
 	public void testUpdateUser() {
-		
-		User user = new User.Builder("a.closa@gmail.com", "acl#@$^", "Andrea Closa", 19, 19, true)
+		User user = userDAO.get(36);
+		Integer id = user.getId();
+		user = new User.Builder("a.closa@gmail.com", "acl#@$^", "Andrea Closa", 19, user.getCreatedAt(), 19, LocalDateTime.now(), true)
 					.build();
-		user.setId(36);
-		user = userDAO.update(user);
+		user.setId(id);
+		user = userDAO.update(user);	
 		String expected = "acl#@$^";
 		String actual = user.getPassword();
 		
 		assertEquals(expected, actual);
+	}
+	
+	@DisplayName("Get User test")
+	@Test
+	public void testGetUserFound() {
+		Integer id = 36;
+		User user = userDAO.get(id);
+		
+		assertNotNull(user);
+	}
+	
+	@Test
+	public void testGetUserNotFound() {
+		Integer id = 88;
+		User user = userDAO.get(id);
+		
+		assertNull(user);
+	}
+	
+	@Test
+	public void testDeleteUser() {
+		Integer id = 23;
+		try {
+			userDAO.delete(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		User user = userDAO.get(id);
+		
+		assertNull(user);
+	}
+	
+	@Test
+	public void testDeleteNonExistUser() {
+		
+		assertThrows(EntityNotFoundException.class, () ->{
+			Integer id = 23;
+			userDAO.delete(id);
+		});
 	}
 	
 	@AfterAll

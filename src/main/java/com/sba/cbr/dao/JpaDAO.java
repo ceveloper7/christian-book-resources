@@ -1,6 +1,7 @@
 package com.sba.cbr.dao;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
 
 public class JpaDAO<E> {
@@ -46,4 +47,24 @@ public class JpaDAO<E> {
 		
 		return entity;
 	}
+	
+	public E find(Class<E> type, Object id) {
+		E entity = entityManager.find(type, id);
+		if(entity != null)
+			entityManager.refresh(entity);
+		return entity;
+	}
+	
+	public void delete(Class<E> type, Object id) throws EntityNotFoundException{
+		try {
+			transaction.begin();
+			Object reference = entityManager.getReference(type, id);
+			entityManager.remove(reference);
+			transaction.commit();
+		}
+		catch(EntityNotFoundException ex) {
+			throw new EntityNotFoundException();
+		}
+	}
+	
 }

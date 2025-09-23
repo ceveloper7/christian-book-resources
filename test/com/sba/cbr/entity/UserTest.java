@@ -10,7 +10,7 @@ import jakarta.persistence.Persistence;
 public class UserTest {
 	public static void main(String[] args) {
 		
-		User user = new User.Builder("m.dominguez@gmail.com", "%%domm$%", "Mario Dominguez", 19, 19, true)
+		User user = new User.Builder("f.gregory@gmail.com", "%%fgreg$%", "Francisco Gregory", 19, null, 19, null, true)
 					.build();
 		
 		EntityTransaction transaction = null;

@@ -1,5 +1,7 @@
 package com.sba.cbr.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -11,7 +13,7 @@ import jakarta.validation.constraints.Size;
 
 
 @Entity
-@Table(name="users")
+@Table(name="user")
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
 @AttributeOverride(name = "active", column = @Column(name = "is_active"))
 public class User extends BaseEntity{
@@ -33,9 +35,15 @@ public class User extends BaseEntity{
 	@Column(name = "created_by")
 	private Integer createdBy;
 	
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
+	
 	@NotNull
 	@Column(name = "updated_by")
 	private Integer updatedBy;
+	
+	@Column(name = "updated_at")
+	private LocalDateTime updatedAt;
 	
 //	@Embedded
 //	private AuditFields audit;
@@ -51,16 +59,21 @@ public class User extends BaseEntity{
 		private String password;
 		private String fullname;
 		private Integer createdBy;
+		private LocalDateTime createdAt;
 		private Integer updatedBy;
+		private LocalDateTime updatedAt;
 //		private AuditFields audit;
 		private boolean active;
 		
-		public Builder(String email, String password, String fullname, Integer createdBy, Integer updatedBy, boolean active) {
+		public Builder(String email, String password, String fullname, Integer createdBy, 
+						LocalDateTime createAt, Integer updatedBy, LocalDateTime updatedAt, boolean active) {
 			this.email = email;
 			this.password = password;
 			this.fullname = fullname;
 			this.createdBy = createdBy;
+			this.createdAt = createAt;
 			this.updatedBy = updatedBy;
+			this.updatedAt = updatedAt;
 			this.active = active;
 		}
 		
@@ -84,7 +97,9 @@ public class User extends BaseEntity{
 		this.password = builder.password;
 		this.fullname = builder.fullname;
 		this.createdBy = builder.createdBy;
+		this.createdAt = builder.createdAt;
 		this.updatedBy = builder.updatedBy;
+		this.updatedAt = builder.updatedAt;
 		
 //		this.audit = builder.audit;
 		this.active = builder.active;
@@ -101,6 +116,22 @@ public class User extends BaseEntity{
 
 	public String getFullname() {
 		return fullname;
+	}
+	
+	public Integer getCreatedBy() {
+		return createdBy;
+	}
+	
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+	
+	public Integer getUpdatedby() {
+		return updatedBy;
+	}
+	
+	public LocalDateTime getUpdatedAT() {
+		return updatedAt;
 	}
 
 //	public AuditFields getAuditFields() {

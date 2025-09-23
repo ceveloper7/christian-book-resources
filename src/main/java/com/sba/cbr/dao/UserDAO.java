@@ -6,6 +6,7 @@ import com.sba.cbr.dataobjects.RUser;
 import com.sba.cbr.entity.User;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 
 public class UserDAO extends JpaDAO<User> implements GenericDAO<User>{
 	
@@ -25,14 +26,17 @@ public class UserDAO extends JpaDAO<User> implements GenericDAO<User>{
 
 	@Override
 	public User get(Object id) {
-		// TODO Auto-generated method stub
-		return null;
+		return super.find(User.class, id);
 	}
 
 	@Override
-	public void delete(Object id) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Object id) throws EntityNotFoundException {
+		try {
+			super.delete(User.class, id);
+		}
+		catch (EntityNotFoundException e) {
+			throw new EntityNotFoundException();
+		}
 	}
 
 	@Override
