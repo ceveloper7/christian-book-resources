@@ -12,6 +12,7 @@ public interface GenericDAO<T> {
 	T update(T t);
 	T get(Object id);
 	void delete(Object id) throws EntityNotFoundException;
-	List<T> listAll();
+	List<T> listAllActive();
+	List<T> listAllNonActive();
 	long count();
 }

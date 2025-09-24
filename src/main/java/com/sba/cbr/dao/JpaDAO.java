@@ -1,8 +1,11 @@
 package com.sba.cbr.dao;
 
+import java.util.List;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 
 public class JpaDAO<E> {
 	protected EntityManager entityManager;
@@ -65,6 +68,11 @@ public class JpaDAO<E> {
 		catch(EntityNotFoundException ex) {
 			throw new EntityNotFoundException();
 		}
+	}
+	
+	public List<E> findWithNamedQuery(String queryName){
+		Query query = entityManager.createNamedQuery(queryName);
+		return query.getResultList();
 	}
 	
 }

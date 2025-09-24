@@ -6,6 +6,8 @@ import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -16,6 +18,10 @@ import jakarta.validation.constraints.Size;
 @Table(name="user")
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
 @AttributeOverride(name = "active", column = @Column(name = "is_active"))
+@NamedQueries({
+	@NamedQuery(name = "User.findAllActiveUsers", query = "SELECT u FROM User u WHERE active = true ORDER BY u.fullname"),
+	@NamedQuery(name = "User.findAllNonActiveUsers", query = "SELECT u FROM User u WHERE active = false ORDER BY u.fullname")
+})
 public class User extends BaseEntity{
 	@NotNull
 	@Size(max = 64)

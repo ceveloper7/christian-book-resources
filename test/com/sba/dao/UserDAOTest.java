@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -121,6 +122,12 @@ public class UserDAOTest {
 			Integer id = 23;
 			userDAO.delete(id);
 		});
+	}
+	
+	@Test
+	public void testListALlActiveUsers() {
+		List<User> activeUsers = userDAO.listAllActive();
+		assertTrue(activeUsers.size() > 0);
 	}
 	
 	@AfterAll
