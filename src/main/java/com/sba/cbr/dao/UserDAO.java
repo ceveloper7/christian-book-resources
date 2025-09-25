@@ -51,8 +51,7 @@ public class UserDAO extends JpaDAO<User> implements GenericDAO<User>{
 
 	@Override
 	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return super.countWithNamedQuery("User.countAllActiveUsers");
 	}
 
 }

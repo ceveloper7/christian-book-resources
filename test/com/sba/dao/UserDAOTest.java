@@ -125,9 +125,16 @@ public class UserDAOTest {
 	}
 	
 	@Test
-	public void testListALlActiveUsers() {
+	public void testListAllActiveUsers() {
 		List<User> activeUsers = userDAO.listAllActive();
+		
 		assertTrue(activeUsers.size() > 0);
+	}
+	
+	@Test
+	public void testCountAllActiveUsers() {
+		long totalUsers = userDAO.count();
+		assertEquals(18, totalUsers);
 	}
 	
 	@AfterAll

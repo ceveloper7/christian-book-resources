@@ -20,7 +20,8 @@ import jakarta.validation.constraints.Size;
 @AttributeOverride(name = "active", column = @Column(name = "is_active"))
 @NamedQueries({
 	@NamedQuery(name = "User.findAllActiveUsers", query = "SELECT u FROM User u WHERE active = true ORDER BY u.fullname"),
-	@NamedQuery(name = "User.findAllNonActiveUsers", query = "SELECT u FROM User u WHERE active = false ORDER BY u.fullname")
+	@NamedQuery(name = "User.findAllNonActiveUsers", query = "SELECT u FROM User u WHERE active = false ORDER BY u.fullname"),
+	@NamedQuery(name = "User.countAllActiveUsers", query = "SELECT COUNT(*) FROM User u WHERE active = true")
 })
 public class User extends BaseEntity{
 	@NotNull
