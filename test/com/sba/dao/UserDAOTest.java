@@ -43,9 +43,7 @@ public class UserDAOTest {
 	public void testCreateUser() {
 		
 		try {
-			User user = new User.Builder("a.clossa@gmail.com", "acl#@$^", "Andrea Clossa", 19, 
-					LocalDateTime.now(), 19, LocalDateTime.now(), true)
-					.build();
+			User user = new User("a.clossa@gmail.com", "acl#@$^", "Andrea Clossa", 19, LocalDateTime.now(), 19, LocalDateTime.now(), true);
 			
 			user = userDAO.create(user);
 			assertTrue(user.getId() > 0);
@@ -72,13 +70,13 @@ public class UserDAOTest {
 	@DisplayName("Update User Test")
 	@Test
 	public void testUpdateUser() {
-		User user = userDAO.get(36);
+		User user = userDAO.get(37);
 		Integer id = user.getId();
-		user = new User.Builder("a.closa@gmail.com", "acl#@$^", "Andrea Closa", 19, user.getCreatedAt(), 19, LocalDateTime.now(), true)
-					.build();
+		user = new User("f.gregory@gmail.com", "%%fgreg$%", "Francisco Gregory", 19, LocalDateTime.now(), 19, LocalDateTime.now(), true);
+		
 		user.setId(id);
 		user = userDAO.update(user);	
-		String expected = "acl#@$^";
+		String expected = "%%fgreg$%";
 		String actual = user.getPassword();
 		
 		assertEquals(expected, actual);

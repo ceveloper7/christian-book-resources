@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
@@ -60,90 +59,81 @@ public class User extends BaseEntity{
 	private boolean active;
 	
 	public User() {}
-
-	public static class Builder{
-		private String email;
-		private String password;
-		private String fullname;
-		private Integer createdBy;
-		private LocalDateTime createdAt;
-		private Integer updatedBy;
-		private LocalDateTime updatedAt;
-//		private AuditFields audit;
-		private boolean active;
-		
-		public Builder(String email, String password, String fullname, Integer createdBy, 
-						LocalDateTime createAt, Integer updatedBy, LocalDateTime updatedAt, boolean active) {
-			this.email = email;
-			this.password = password;
-			this.fullname = fullname;
-			this.createdBy = createdBy;
-			this.createdAt = createAt;
-			this.updatedBy = updatedBy;
-			this.updatedAt = updatedAt;
-			this.active = active;
-		}
-		
-//		public Builder withAudits(AuditFields audit) {
-//			this.audit = audit;
-//			return this;
-//		}
-		
-//		public Builder Active(boolean active) {
-//			this.active = active;
-//			return this;
-//		}
-		
-		public User build() {
-			return new User(this);
-		}
+	
+	public User(String email, String password, String fullname, Integer createdBy, Integer updatedBy) {
+		this.email = email;
+		this.password = password;
+		this.fullname = fullname;
+		this.createdBy = createdBy;
+		this.updatedBy = updatedBy;
 	}
 	
-	private User(Builder builder) {
-		this.email = builder.email;
-		this.password = builder.password;
-		this.fullname = builder.fullname;
-		this.createdBy = builder.createdBy;
-		this.createdAt = builder.createdAt;
-		this.updatedBy = builder.updatedBy;
-		this.updatedAt = builder.updatedAt;
-		
-//		this.audit = builder.audit;
-		this.active = builder.active;
+	public User(String email, String password, String fullname, Integer createdBy, LocalDateTime createdAt, Integer updatedBy, LocalDateTime updatedAt, boolean active) {
+		this(email, password, fullname, createdBy, updatedBy);
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.active = active;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getEmail() {
 		return email;
 	}
-
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
 	public String getPassword() {
 		return password;
+	}
+	
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 
 	public String getFullname() {
 		return fullname;
 	}
 	
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+	
 	public Integer getCreatedBy() {
 		return createdBy;
+	}
+	
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 	
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 	
+	public void setUpdatedBy(Integer updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	
 	public Integer getUpdatedby() {
 		return updatedBy;
 	}
 	
-	public LocalDateTime getUpdatedAT() {
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	
+	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
-
-//	public AuditFields getAuditFields() {
-//		return audit;
-//	}
+	
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 	
 	public boolean isActive() {
 		return active;
