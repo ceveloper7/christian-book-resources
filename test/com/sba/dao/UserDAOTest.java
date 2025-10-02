@@ -70,13 +70,14 @@ public class UserDAOTest {
 	@DisplayName("Update User Test")
 	@Test
 	public void testUpdateUser() {
-		User user = userDAO.get(37);
+		User user = userDAO.get(19);
 		Integer id = user.getId();
-		user = new User("f.gregory@gmail.com", "%%fgreg$%", "Francisco Gregory", 19, LocalDateTime.now(), 19, LocalDateTime.now(), true);
+		LocalDateTime createdAt = user.getCreatedAt();
+		user = new User("carlos.villanueva.altuna@gmail.com", "b4000$.", "Carlos Eduardo Villanueva Altuna", 19, createdAt, 19, LocalDateTime.now(), true);
 		
 		user.setId(id);
 		user = userDAO.update(user);	
-		String expected = "%%fgreg$%";
+		String expected = "b4000$.";
 		String actual = user.getPassword();
 		
 		assertEquals(expected, actual);

@@ -15,7 +15,7 @@ import com.sba.cbr.service.UserServices;
 /**
  * Servlet implementation class ListUsersServlet
  */
-@WebServlet("/admin/list_users")
+@WebServlet("/admin/user_list")
 public class ListUsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,7 +30,7 @@ public class ListUsersServlet extends HttpServlet {
 		
 		request.setAttribute("listUsers", listUsers);
 		
-		String listPage = "list_users.jsp";
+		String listPage = "user_list.jsp";
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(listPage);
 		requestDispatcher.forward(request, response);
 	}
