@@ -6,6 +6,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+
+import com.sba.cbr.service.UserServices;
 
 
 @WebServlet("/admin/create_user")
@@ -14,6 +17,11 @@ public class CreateUserServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		
+		UserServices userServices = new UserServices();
+		userServices.createUser(request, response);
+		userServices.listUser(request, response);
 	}
 
 }

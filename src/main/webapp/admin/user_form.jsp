@@ -25,14 +25,13 @@
 				</tr>	
 				<tr>
 					<td align="right">Password:</td>
-					<td align="left"><input type="password" id="password" name="password" size="20" 
-						onclick="javascript:history.go(-1);" /></td>
+					<td align="left"><input type="password" id="password" name="password" size="20"> </td>
 				</tr>
 				<tr><td>&nbsp;</td></tr>	
 				<tr>
 					<td colspan="2" align="center">
 						<input type="submit" value="Save"/>
-						<input type="button" value="cancel"/>
+						<input type="button" value="cancel" onclick="javascript:history.go(-1);"/>
 					</td>
 				</tr>
 		</table>
