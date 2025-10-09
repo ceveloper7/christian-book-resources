@@ -18,11 +18,14 @@ import jakarta.validation.constraints.Size;
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
 @AttributeOverride(name = "active", column = @Column(name = "is_active"))
 @NamedQueries({
+	@NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE email = :email"),
 	@NamedQuery(name = "User.findAllActiveUsers", query = "SELECT u FROM User u WHERE active = true ORDER BY u.fullname"),
 	@NamedQuery(name = "User.findAllNonActiveUsers", query = "SELECT u FROM User u WHERE active = false ORDER BY u.fullname"),
 	@NamedQuery(name = "User.countAllActiveUsers", query = "SELECT COUNT(*) FROM User u WHERE active = true")
 })
 public class User extends BaseEntity{
+	private static final long serialVersionUID = 1L;
+
 	@NotNull
 	@Size(max = 64)
 	@Email

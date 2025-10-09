@@ -38,6 +38,13 @@ public class UserDAO extends JpaDAO<User> implements GenericDAO<User>{
 			throw new EntityNotFoundException();
 		}
 	}
+	
+	public User findByEmail(String email) {
+		List<User> users = super.findWithNamedQuery("User.findByEmail", "email", email);
+		if(users != null && users.size() > 0)
+			return users.get(0);
+		return null;
+	}
 
 	@Override
 	public List<User> listAllActive() {

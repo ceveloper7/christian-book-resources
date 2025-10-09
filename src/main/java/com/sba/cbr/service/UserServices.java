@@ -19,26 +19,36 @@ public class UserServices {
 	private EntityManagerFactory entityManagerFactory;
 	private EntityManager entityManager;
 	private UserDAO userDAO;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
 	
-	public UserServices() {
+	public UserServices(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+		this.response = response;
 		entityManagerFactory = Persistence.createEntityManagerFactory("cbr");
 		entityManager = entityManagerFactory.createEntityManager();
 		userDAO = new UserDAO(entityManager);
 	}
 	
+	public void listUser()throws ServletException, IOException {
+		listUser(null);
+	}
 	
-	public void listUser(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+	
+	public void listUser(String message)throws ServletException, IOException {
 		List<User> listUsers = userDAO.listAllActive();
 		
 		request.setAttribute("listUsers", listUsers);
-		request.setAttribute("message", "New user created successfully");
+		if(message != null) {
+			request.setAttribute("message", "New user created successfully");
+		}
 		
 		String listPage = "user_list.jsp";
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(listPage);
 		requestDispatcher.forward(request, response);
 	}	
 	
-	public void createUser(HttpServletRequest request, HttpServletResponse response) {
+	public void createUser() {
 		String email = request.getParameter("email");
 		String fullname = request.getParameter("fullname");
 		String password = request.getParameter("password");
