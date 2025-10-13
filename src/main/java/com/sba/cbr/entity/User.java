@@ -1,6 +1,9 @@
 package com.sba.cbr.entity;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
+
+import com.sba.cbr.util.EmailValidator;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
@@ -63,80 +66,88 @@ public class User extends BaseEntity{
 	
 	public User() {}
 	
-	public User(String email, String password, String fullname, Integer createdBy, Integer updatedBy) {
-		this.email = email;
+	public User(String email, String password, String fullname, Integer createdBy, LocalDateTime createdAt, Integer updatedBy, LocalDateTime updatedAt, boolean active) {
+		
+		Objects.requireNonNull(email, "email can not be null");
+		Objects.requireNonNull(password, "password can not be null");
+		Objects.requireNonNull(fullname, "full name can not be null");
+		Objects.requireNonNull(createdBy, "created by can not be null");
+		Objects.requireNonNull(createdAt, "created at can not be null");
+		Objects.requireNonNull(updatedBy, "updated by can not be null");
+		Objects.requireNonNull(updatedAt, "updated at can not be null");
+		Objects.requireNonNull(active, "active can not be null");
+		
+		EmailValidator validEmail = EmailValidator.of(email);
+		
+		this.email = validEmail.get();
 		this.password = password;
 		this.fullname = fullname;
 		this.createdBy = createdBy;
-		this.updatedBy = updatedBy;
-	}
-	
-	public User(String email, String password, String fullname, Integer createdBy, LocalDateTime createdAt, Integer updatedBy, LocalDateTime updatedAt, boolean active) {
-		this(email, password, fullname, createdBy, updatedBy);
 		this.createdAt = createdAt;
+		this.updatedBy = updatedBy;
 		this.updatedAt = updatedAt;
 		this.active = active;
 	}
 	
-	public void setEmail(String email) {
-		this.email = email;
-	}
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
 
 	public String getEmail() {
 		return email;
 	}
 	
-	public void setPassword(String password) {
-		this.password = password;
-	}
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
 	
 	public String getPassword() {
 		return password;
 	}
 	
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
+//	public void setFullname(String fullname) {
+//		this.fullname = fullname;
+//	}
 
 	public String getFullname() {
 		return fullname;
 	}
 	
-	public void setCreatedBy(Integer createdBy) {
-		this.createdBy = createdBy;
-	}
+//	public void setCreatedBy(Integer createdBy) {
+//		this.createdBy = createdBy;
+//	}
 	
 	public Integer getCreatedBy() {
 		return createdBy;
 	}
 	
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
+//	public void setCreatedAt(LocalDateTime createdAt) {
+//		this.createdAt = createdAt;
+//	}
 	
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 	
-	public void setUpdatedBy(Integer updatedBy) {
-		this.updatedBy = updatedBy;
-	}
+//	public void setUpdatedBy(Integer updatedBy) {
+//		this.updatedBy = updatedBy;
+//	}
 	
 	public Integer getUpdatedby() {
 		return updatedBy;
 	}
 	
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
-	}
+//	public void setUpdatedAt(LocalDateTime updatedAt) {
+//		this.updatedAt = updatedAt;
+//	}
 	
 	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
 	
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+//	public void setActive(boolean active) {
+//		this.active = active;
+//	}
 	
 	public boolean isActive() {
 		return active;
