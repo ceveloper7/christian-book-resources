@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.sba.cbr.dao.UserDAO;
 import com.sba.cbr.entity.User;
+import com.sba.cbr.util.Email;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -48,12 +49,22 @@ public class UserServices {
 		requestDispatcher.forward(request, response);
 	}	
 	
-	public void createUser() {
-		String email = request.getParameter("email");
+	public void createUser() throws ServletException, IOException {
+		Email email = Email.of(request.getParameter("email"));
 		String fullname = request.getParameter("fullname");
 		String password = request.getParameter("password");
 		
-		User user = new User(email, password, fullname, 19, LocalDateTime.now(), 19, LocalDateTime.now(), true);
-		userDAO.create(user);
+		User existUser = userDAO.findByEmail(email.get());
+		
+		if(existUser != null) {
+			String message = "Could not create user. User email " + email.get() +  " already exists";
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
+			dispatcher.forward(request, response);
+		}else {
+			User user = new User(email.get(), password, fullname, 19, LocalDateTime.now(), 19, LocalDateTime.now(), true);
+			userDAO.create(user);
+			listUser("New user created successfully");
+		}
 	}
 }

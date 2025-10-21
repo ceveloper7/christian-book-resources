@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
-public final class EmailValidator implements Supplier<String> {
+public final class Email implements Supplier<String> {
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
@@ -12,7 +12,7 @@ public final class EmailValidator implements Supplier<String> {
 
 	private final String value;
 	
-	private EmailValidator(String value) {
+	private Email(String value) {
 		this.value = value;
 	}
 	
@@ -29,7 +29,7 @@ public final class EmailValidator implements Supplier<String> {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        EmailValidator email = (EmailValidator) o;
+        Email email = (Email) o;
         return Objects.equals(value, email.value);
     }
 
@@ -43,12 +43,12 @@ public final class EmailValidator implements Supplier<String> {
         return value;
     }
 
-    public static EmailValidator of(String value) {
+    public static Email of(String value) {
         Objects.requireNonNull(value, "email is required");
         if (!PATTERN.matcher(value).matches()) {
             throw new IllegalArgumentException("Invalid email: " + value);
         }
 
-        return new EmailValidator(value);
+        return new Email(value);
     }
 }

@@ -3,8 +3,6 @@ package com.sba.cbr.entity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import com.sba.cbr.util.EmailValidator;
-
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -77,7 +75,7 @@ public class User extends BaseEntity{
 		Objects.requireNonNull(updatedAt, "updated at can not be null");
 		Objects.requireNonNull(active, "active can not be null");
 		
-		EmailValidator validEmail = EmailValidator.of(email);
+		com.sba.cbr.util.Email validEmail = com.sba.cbr.util.Email.of(email);
 		
 		this.email = validEmail.get();
 		this.password = password;
