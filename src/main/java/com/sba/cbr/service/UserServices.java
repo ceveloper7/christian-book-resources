@@ -67,4 +67,11 @@ public class UserServices {
 			listUser("New user created successfully");
 		}
 	}
+
+	public void editUser() {
+		Integer userId = Integer.valueOf(request.getParameter("id"));
+		User user = userDAO.get(userId);
+		System.out.println(user.getFullname());
+		
+	}
 }
